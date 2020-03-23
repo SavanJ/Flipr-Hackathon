@@ -1,0 +1,75 @@
+<html>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/dashboard']">Lists</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/dashboard/team']">Teams</a>
+        </li>
+        <li class="nav-item" *ngIf="this.authService.loggedIn()">
+          <a class="nav-link" (click)="logout()" style="cursor: pointer;" >Logout</a>
+        </li>
+        <li class="nav-item" *ngIf="!this.authService.loggedIn()">
+          <a class="nav-link" [routerLink]="['/login']">Log in</a>
+        </li>
+        <li class="nav-item" *ngIf="this.authService.loggedIn()">
+          <a class="nav-link" href="#">
+            <b>Welcome {{this.authService.username}}</b>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <body style="margin: 20px;" >
+    <div class="row">
+
+      <div class="container-fluid" style="padding: 10px;" >
+      <h6 > Team Members </h6>
+        <span *ngFor="let member of this.members"> {{ member }} , </span>
+      </div>
+
+      <div class="col-md-3" *ngFor="let list of this.teamLists;let i of index">
+        <div class="card card-size" id={{list.cardNumber}}>
+          <div class="card-body">
+            <h5 class="card-title">{{list.cardName}}</h5>
+            <div class="lists" >
+            <a href="#" class="btn btn-primary card-links" *ngFor="let card of list.cards"> {{card}} </a>
+            </div>
+            <button class="btn btn-light"  (click)="addCard1(list.cardNumber)" 
+            style="margin-top: 5px;" > Click to add cards </button>
+            <div class="forAdd">
+              <form [formGroup]="form" (ngSubmit)="onSubmit(list.cardNumber,form)">
+              <textarea class="form-control" formControlName="cardName"
+              rows="3" placeholder="Enter your card name"></textarea>
+              <button type="submit" class="btn btn-success" style="margin-top: 5px;" > Submit </button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3" id="newList">
+        <button class="btn btn-light" (click)="newList()"
+        style="margin-top: 5px;" > Click to add new list </button>
+        <div class="forAddList">
+          <form [formGroup]="form1" (ngSubmit)="createNewList(form1)">
+          <input class="form-control" formControlName="newCard" placeholder="Enter your list name">
+          <button type="submit" class="btn btn-success" style="margin-top: 5px;" > Submit </button>
+        </form>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
+

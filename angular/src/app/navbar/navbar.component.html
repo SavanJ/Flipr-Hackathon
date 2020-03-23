@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-light" id=navbar>
+    <a class="navbar-brand" [routerLink]="['']" id="brand_text"> Dashboard </a>
+    <button class="navbar-toggler"  type="button" (click)="toggle()">
+      <span class="navbar-toggler-icon" ></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngClass]="{ 'show': navbarOpen }">
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control remove_default_border mr-sm-2 " 
+         type="search" placeholder="Search"
+         (keyup)="search($event)" aria-label="Search">
+        <button class="btn btn-outline-success remove_default_background my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      <ul class="navbar-nav ml-auto" > 
+        <li *ngIf="!this.authService.loggedIn()" class="nav-item" style="padding-right: 10px;padding-bottom: 5px;">
+            <button mat-raised-button 
+            class="button login-button" 
+            [routerLink]="['/register']" > Login </button>
+        </li>
+        <li *ngIf="this.authService.loggedIn()" class="nav-item" style="padding-right: 10px;padding-bottom: 5px;">
+          <div ngbDropdown class="d-inline-block">
+          <button class="btn button btn-outline-default" id="dropdownMenuButton"
+           ngbDropdownToggle>Welcome {{this.name}}</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+              <button ngbDropdownItem (click)="logout()"
+               style="color: green;" >Logout</button>
+              <!-- <button ngbDropdownItem>Something else here</button> -->
+            </div>
+          </div>
+        </li>
+        <!-- <li *ngIf="this.loginService.loggedIn()" class="nav-item" style="padding-right: 10px;padding-bottom: 5px;">
+          <button mat-raised-button 
+          class="button login-button"
+          (click)="local()" 
+           > local </button>
+        </li> -->
+        <li *ngIf="!this.loginService.loggedIn()" 
+        class="nav-item" style="padding-right: 20px;padding-bottom: 5px;">
+            <button mat-raised-button [routerLink]="['/login']"
+            class="button login-button"> Sign in </button>
+        </li>
+      </ul>
+    </div>
+  </nav>

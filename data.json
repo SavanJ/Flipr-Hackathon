@@ -1,0 +1,32 @@
+[{
+    "email":"savanjasani99@gmail.com",
+    "password":"123",
+    "username" : "sam",
+    "cards" : [
+        {
+            "cardName" : "card1",
+            "cardNumber" : 1,
+            "cards" : ["swimming","dancing"]
+        },
+        {
+            "cardName" : "card2",
+            "cardNumber" : 2,
+            "cards" : ["abc","def"]
+        }
+    ]
+},
+{
+    "teamName" : "Team1",
+    "cards" : [
+        {
+            "cardName" : "card1",
+            "cardNumber" : 1,
+            "cards" : ["swimming","dancing"]
+        },
+        {
+            "cardName" : "card2",
+            "cardNumber" : 2,
+            "cards" : ["abc","def"]
+        }
+    ]
+}]

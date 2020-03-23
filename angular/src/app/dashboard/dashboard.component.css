@@ -1,0 +1,16 @@
+.card-links
+{
+    width: 100%;
+    /* display: block; */
+    margin-bottom: 10px;
+    color: white;
+}
+.card-size
+{
+    width: 15rem;
+}
+.forAdd,.forAddList
+{
+    border: 1px solid black;
+    display: none;
+}
