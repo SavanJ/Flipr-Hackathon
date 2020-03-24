@@ -90,10 +90,4 @@ export class TeamdetailComponent implements OnInit {
   //     this.getTeamLists()
   //   })
   // }
-  
-  logout(){
-    localStorage.removeItem('token');
-    this.router.navigate([''])
-    // console.log('hi')
-  }
 }

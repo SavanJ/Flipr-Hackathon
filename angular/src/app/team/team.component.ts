@@ -89,9 +89,4 @@ export class TeamComponent implements OnInit {
       console.log('successfully member created')
     })
   }
-  logout(){
-    localStorage.removeItem('token');
-    this.router.navigate([''])
-    // console.log('hi')
-  }
 }

@@ -1,32 +1,4 @@
 <html>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/dashboard']">Lists</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/dashboard/team']">Teams</a>
-        </li>
-        <li class="nav-item" *ngIf="this.authService.loggedIn()">
-          <a class="nav-link" (click)="logout()" style="cursor: pointer;" >Logout</a>
-        </li>
-        <li class="nav-item" *ngIf="!this.authService.loggedIn()">
-          <a class="nav-link" [routerLink]="['/login']">Log in</a>
-        </li>
-        <li class="nav-item" *ngIf="this.authService.loggedIn()">
-          <a class="nav-link" href="#">
-            <b>Welcome {{this.username.name}}</b>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
 
   <body style="margin: 20px;" >
     <div class="row">
