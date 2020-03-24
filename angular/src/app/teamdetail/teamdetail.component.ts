@@ -19,6 +19,7 @@ export class TeamdetailComponent implements OnInit {
   parameter;
   teamLists;
   members;
+  username;
 
   constructor(private route:ActivatedRoute,private teamService:TeamService,
     private authService:AuthService,private router:Router) { }
@@ -42,9 +43,10 @@ export class TeamdetailComponent implements OnInit {
 
   getTeamDetails(id){
     this.teamService.getTeamDetail(id).subscribe((res)=>{
+      this.username = res[0].teamName
       this.teamLists = res[0].lists
       this.members = res[0].members
-      // console.log(res[0].lists)
+      // console.log(res[0].lists,this.username,res[0].teamName)
     })
     // console.log(id)
   }
@@ -73,7 +75,7 @@ export class TeamdetailComponent implements OnInit {
   }
   createNewList(form1){
     console.log(form1.value.newCard)
-    var temp = {"newTeamCardName" : form1.value.newCard , "teamid":this.parameter}
+    var temp = {"newTeamCardName" : form1.value.newCard , "teamName":this.username}
     form1.reset()
     this.teamService.createTeamList(temp).subscribe((res) => {
       // console.log('new list created successfully',res);

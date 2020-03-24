@@ -47,7 +47,7 @@
             <button class="btn btn-light"  (click)="addCard1(list.cardNumber)" 
             style="margin-top: 5px;" > Click to add cards </button>
             <div class="forAdd">
-              <form [formGroup]="form" (ngSubmit)="onSubmit(list.cardNumber,form)">
+              <form [formGroup]="form" (ngSubmit)="onSubmit(list._id,form)">
               <textarea class="form-control" formControlName="cardName"
               rows="3" placeholder="Enter your card name"></textarea>
               <button type="submit" class="btn btn-success" style="margin-top: 5px;" > Submit </button>

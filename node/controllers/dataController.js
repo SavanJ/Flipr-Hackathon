@@ -153,21 +153,28 @@ exports.getTeamDetail = (req,res,next) => {
 
 exports.createTeamList = (req,res,next) => {
     newTeamCardName = req.body.newTeamCardName;
-    teamid = req.body.teamid;
+    teamName = req.body.teamName;
     console.log(newTeamCardName)
 
-    // var teamid = "5e76e3c98dd613062464cdf9"
-
-    Team.aggregate([{$project:{count:{$size:"$lists"}}}]).then(docs => {
-        console.log(docs[0].count,docs)
+    Team.aggregate([{ $match: { teamName: teamName } },{$project:{count:{$size:"$lists"}}}]).then(docs => {
+        console.log(docs[0].count)
         var count = docs[0].count
-            counter = 
-        {
-            "cardName":newTeamCardName,
-            "cardNumber":count+1,
-            "cards":[]
-        }
-            Team.updateOne({_id : teamid}, { $push: {"lists" : counter} }, (err, doc) => {
+        // if(docs.length == 0){
+        //     console.log('yes empty')
+        //     counter = 
+        //     {
+        //         "cardName":newTeamCardName,
+        //         "cardNumber":1,
+        //         "cards":[]
+        //     }
+        // }
+        counter = 
+            {
+                "cardName":newTeamCardName,
+                "cardNumber":count+1,
+                "cards":[]
+            }
+            Team.updateOne({teamName : teamName}, { $push: {"lists" : counter} }, (err, doc) => {
             if (!err) { res.json(doc); }
             else { console.log('Error in Employee Update :' + JSON.stringify(err, undefined, 2)); }
         });
@@ -182,7 +189,7 @@ exports.insertCardIntoList = (req,res,next) => {
     temp = "lists" + "."+id+"."+"cards";
     // cards = cards[0].cards;
     console.log(temp)
-    Team.updateOne({"lists.cardNumber" : id}, { $push: {"lists.$.cards" : value} }, { new: true }, (err, doc) => {
+    Team.updateOne({"lists._id" : id}, { $push: {"lists.$.cards" : value} }, { new: true }, (err, doc) => {
         if (!err) { res.json(doc); }
         else { console.log('Error in Employee Update :' + JSON.stringify(err, undefined, 2)); }
     });
